@@ -123,7 +123,7 @@ int main()
         if (!mass[r] || !*mass[r]) {
             strings_true = r;
             break;
-        } //Считываем строки в массив
+        }
     }
     int coord[strings_true][3];
     if (!(Correct_Check(mass, strings_true)))
