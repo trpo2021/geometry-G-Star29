@@ -33,7 +33,8 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
                 if (mass[i][j] == '-')
                     continue;
                 while (mass[i][j] != ' ') {
-                    if (!((mass[i][j] <= '9') && (mass[i][j] >= '1'))) {
+                    if (!(((mass[i][j] <= '9') && (mass[i][j] >= '1'))
+                          || (mass[i][j] == '.'))) {
                         if (i == 0)
                             i = i - 1;
                         cout << "Error at column:expected 'circle(x x, x)' "
@@ -49,9 +50,8 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
                 if (mass[i][j] == '-')
                     continue;
                 while (mass[i][j] != ',') {
-                    if (!((mass[i][j] <= '9') && (mass[i][j] >= '1'))) {
-                        if (i == 0)
-                            i = i - 1;
+                    if (!(((mass[i][j] <= '9') && (mass[i][j] >= '1'))
+                          || (mass[i][j] == '.'))) {
                         cout << "Error"
                              << " : expected 'circle(x x, x)' where x - number "
                                 "only "
@@ -62,6 +62,8 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
                     j++;
                 }
                 j++;
+                if (mass[i][j] == '-')
+                    continue;
                 if (mass[i][j] != ' ') {
                     if (i == 0)
                         i = i - 1;
@@ -74,7 +76,8 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
                 }
                 j++;
                 while (mass[i][j] != ')') {
-                    if (!((mass[i][j] <= '9') && (mass[i][j] >= '1'))) {
+                    if (!(((mass[i][j] <= '9') && (mass[i][j] >= '1'))
+                          || (mass[i][j] == '.'))) {
                         if (i == 0)
                             i = i - 1;
                         cout << "Error"
@@ -129,7 +132,7 @@ int main()
             break;
         } //Считываем строки в массив
     }
-    int coord[strings_true][3];
+    double coord[strings_true][3];
     if (!(Correct_Check(mass, strings_true)))
         return 1;
     for (k = 0; k < strings_true; k++)
@@ -140,20 +143,20 @@ int main()
                     xord = xord + mass[k][j];
                     j++;
                 }
-                coord[k][0] = std::stoi(xord);
+                coord[k][0] = std::stod(xord);
                 j++;
                 while (mass[k][j] != ',') {
                     yord = yord + mass[k][j];
                     j++;
                 }
-                coord[k][1] = std::stoi(yord);
+                coord[k][1] = std::stod(yord);
                 j++;
                 j++;
                 while (mass[k][j] != ')') {
                     rad = rad + mass[k][j];
                     j++;
                 }
-                coord[k][2] = std::stoi(rad);
+                coord[k][2] = std::stod(rad);
                 xord.clear();
                 yord.clear();
                 rad.clear();
