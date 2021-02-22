@@ -30,6 +30,8 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
         for (j = 0; j < 30; j++) {
             if (mass[i][j] == '(') {
                 j++;
+                if (mass[i][j] == '-')
+                    continue;
                 while (mass[i][j] != ' ') {
                     if (!((mass[i][j] <= '9') && (mass[i][j] >= '1'))) {
                         if (i == 0)
@@ -44,12 +46,14 @@ bool Correct_Check(char (&mass)[row][col], int strings_true)
                     j++;
                 }
                 j++;
+                if (mass[i][j] == '-')
+                    continue;
                 while (mass[i][j] != ',') {
                     if (!((mass[i][j] <= '9') && (mass[i][j] >= '1'))) {
                         if (i == 0)
                             i = i - 1;
                         cout << "Error"
-                             << ": expected 'circle(x x, x)' where x - number "
+                             << " : expected 'circle(x x, x)' where x - number "
                                 "only "
                                 "at string "
                              << i + 2 << endl;
@@ -123,7 +127,7 @@ int main()
         if (!mass[r] || !*mass[r]) {
             strings_true = r;
             break;
-        }
+        } //Считываем строки в массив
     }
     int coord[strings_true][3];
     if (!(Correct_Check(mass, strings_true)))
